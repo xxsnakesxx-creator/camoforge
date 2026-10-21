@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0e">
+  <title>CAMO//FORGE — Wähle dein Spiel</title>
+  <meta name="description" content="Dein Camo-Mastery-Tracker für Call of Duty: Modern Warfare 4 und Warzone.">
+  <style>
+    :root { color-scheme: dark; --bg:#090a0d; --panel:#121419; --line:#292d35; --text:#f5f6f8; --muted:#a0a5af; }
+    * { box-sizing:border-box; }
+    html { min-height:100%; }
+    body {
+      margin:0; min-height:100vh; padding:28px 18px 36px;
+      background:radial-gradient(ellipse at top, #1a1c22 0%, var(--bg) 54%);
+      color:var(--text); font-family:Arial, Helvetica, sans-serif;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .shell { width:min(100%, 980px); }
+    header { text-align:center; margin-bottom:38px; }
+    .eyebrow { color:#b4b8c1; font-size:.76rem; letter-spacing:.28em; text-transform:uppercase; margin-bottom:14px; }
+    h1 { margin:0; font-size:clamp(2.5rem, 9vw, 5.1rem); line-height:.98; font-weight:900; letter-spacing:-.065em; }
+    h1 span { color:#f0c928; }
+    .subtitle { color:var(--muted); font-size:1rem; line-height:1.6; max-width:560px; margin:18px auto 0; }
+    .choices { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:18px; }
+    .game {
+      display:flex; flex-direction:column; min-height:300px; padding:26px;
+      text-decoration:none; color:var(--text); background:linear-gradient(150deg, #191b21, #101115);
+      border:1px solid var(--line); border-radius:18px; position:relative; overflow:hidden;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .game:focus-visible { outline:3px solid white; outline-offset:4px; }
+    .game:hover { transform:translateY(-4px); }
+    .game::before { content:""; position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent); }
+    .game::after { content:attr(data-number); position:absolute; right:12px; bottom:-38px; font-size:9rem; font-weight:900; color:var(--accent); opacity:.06; line-height:1; pointer-events:none; }
+    .mw4 { --accent:#f0c928; }
+    .warzone { --accent:#f04444; }
+    .mw4:hover { border-color:#f0c928; box-shadow:0 12px 36px #f0c92812; }
+    .warzone:hover { border-color:#f04444; box-shadow:0 12px 36px #f0444412; }
+    .tag { font-size:.72rem; letter-spacing:.19em; color:var(--accent); font-weight:800; text-transform:uppercase; }
+    h2 { margin:18px 0 12px; font-size:clamp(1.6rem, 5vw, 2.3rem); line-height:1.05; letter-spacing:-.04em; }
+    .desc { color:var(--muted); line-height:1.55; margin:0; max-width:330px; }
+    .enter { margin-top:auto; padding-top:28px; display:flex; align-items:center; justify-content:space-between; gap:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; font-size:.8rem; }
+    .arrow { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border:1px solid var(--accent); border-radius:50%; color:var(--accent); font-size:1.3rem; }
+    footer { text-align:center; color:#747984; font-size:.72rem; letter-spacing:.12em; margin-top:28px; text-transform:uppercase; }
+    @media (max-width:650px) {
+      body { padding:32px 16px 26px; align-items:flex-start; }
+      header { margin:22px 0 28px; }
+      .choices { grid-template-columns:1fr; gap:14px; }
+      .game { min-height:245px; padding:23px; }
+      .subtitle { font-size:.94rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">Your camo mastery hub</div>
+      <h1>CAMO<span>//</span>FORGE</h1>
+      <p class="subtitle">Wähle dein Spiel und verfolge deinen Tarnungs-Fortschritt. Jeder Bereich hat sein eigenes Design und seinen eigenen Tracker.</p>
+    </header>
+
+    <nav class="choices" aria-label="Spiel auswählen">
+      <a class="game mw4" data-number="04" href="./Mw4/">
+        <span class="tag">Gelb // Modern Warfare</span>
+        <h2>MODERN<br>WARFARE 4</h2>
+        <p class="desc">Deine Waffen, Tarnungen und Mastery-Ziele – alles an einem Ort.</p>
+        <span class="enter"><span>Tracker öffnen</span><span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="game warzone" data-number="WZ" href="./Warzone/">
+        <span class="tag">Rot // Battle Royale</span>
+        <h2>WARZONE</h2>
+        <p class="desc">Öffne deinen Warzone-Bereich und behalte deine Camo-Ziele im Blick.</p>
+        <span class="enter"><span>Warzone öffnen</span><span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    </nav>
+
+    <footer>CAMO//FORGE &nbsp; • &nbsp; Built for the grind</footer>
+  </main>
+</body>
+</html>
