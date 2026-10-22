@@ -172,4 +172,100 @@ load();renderTabs();renderWeapons();renderMastery();updateStats();
 </script>
 
 <script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }</script>
+
+<style id="cf-language-style">
+body.cf-has-language-switch{padding-top:64px}
+#cf-language-switch{position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:5px;padding:5px;border:1px solid #454950;border-radius:999px;background:#111318eF;backdrop-filter:blur(12px);box-shadow:0 5px 22px #0008}
+#cf-language-switch button{border:0;border-radius:999px;padding:7px 10px;background:transparent;color:#c5c8ce;font-size:13px;font-weight:800;line-height:1;cursor:pointer}
+#cf-language-switch button[aria-pressed="true"]{background:#30343c;color:#fff;box-shadow:inset 0 0 0 1px #646a75}
+body.cf-has-language-switch{padding-top:56px}
+@media(max-width:600px){#cf-language-switch{top:8px;right:8px}#cf-language-switch button{padding:8px 9px}}
+</style>
+<div id="cf-language-switch" role="group" aria-label="Language / Sprache">
+<button type="button" data-lang="de" aria-pressed="true" title="Deutsch">🇩🇪 DE</button>
+<button type="button" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+</div>
+<script id="cf-language-script">
+(function(){
+  const dictionary = [["Wähle dein Spiel und verfolge deinen Tarnungs-Fortschritt. Jeder Bereich hat sein eigenes Design und seinen eigenen Tracker.", "Choose your game and track your camo progress. Each section has its own design and tracker."], ["Diese übergreifenden Herausforderungen werden getrennt vom 15-Camo-Fortschritt je Waffe verfolgt.", "These overall challenges are tracked separately from each weapon's 15-camo progress."], ["CAMO//FORGE · Fan-made tracker · Kein offizielles Activision-Produkt.", "CAMO//FORGE · Fan-made tracker · Not an official Activision product."], ["Öffne deinen Warzone-Bereich und behalte deine Camo-Ziele im Blick.", "Open your Warzone section and keep track of your camo goals."], ["Optionaler separater Fortschritt für die Pyroclast-Tarnungsreihe.", "Optional separate progress for the Pyroclast camo series."], ["Deine Waffen, Tarnungen und Mastery-Ziele – alles an einem Ort.", "Your weapons, camos, and mastery goals — all in one place."], ["Dein Warzone-Fortschritt. Wähle eine Waffe, hake Tarnungen über", "Your Warzone progress. Choose a weapon and mark camos using"], ["Fortschritt wird automatisch auf diesem Gerät gespeichert.", "Progress is saved automatically on this device."], ["Fortschritt wird automatisch auf diesem Gerät gespeichert.", "Progress is saved automatically on this device."], ["Dein Fortschritt. Jede Waffe. Jede Tarnung. Tippe auf", "Your progress. Every weapon. Every camo. Tap"], ["Öffne eine Waffe und sammle deine Tarnungen ein.", "Open a weapon and collect your camos."], ["Die interaktive Ansicht benötigt JavaScript.", "The interactive view requires JavaScript."], ["Keine Waffe gefunden. Suchbegriff ändern?", "No weapon found. Try changing your search."], ["Tippe auf eine Tarnung, um sie abzuhaken", "Tap a camo to mark it complete"], ["Call of Duty · Modern Warfare 4", "Call of Duty · Modern Warfare 4"], ["CAMO//FORGE — Wähle dein Spiel", "CAMO//FORGE — Choose your game"], ["Waffen-Tarnungen abgeschlossen", "weapon camos completed"], ["Übergreifende Mastery-Tarnung", "Overall mastery camo"], ["Fortschritt: niedrig zuerst", "Progress: lowest first"], ["Optionaler Prestige-Track", "Optional prestige track"], ["Bestätigte Launch-Waffen", "Confirmed launch weapons"], ["Fortschritt: hoch zuerst", "Progress: highest first"], ["WARZONE MASTERY TRACKER", "WARZONE MASTERY TRACKER"], ["Tarnungen abgeschlossen", "camos completed"], ["Alle Tarnungen erledigt", "All camos completed"], ["Warzone · Schwarz / Rot", "Warzone · Black / Red"], ["Gelb // Modern Warfare", "Yellow // Modern Warfare"], ["Call of Duty · Warzone", "Call of Duty · Warzone"], ["DEIN GESAMTFORTSCHRITT", "YOUR OVERALL PROGRESS"], ["Alle 15 Camos erledigt", "All 15 camos completed"], ["Your camo mastery hub", "Your camo mastery hub"], ["Gold auf allen Waffen", "Gold on all weapons"], ["Scharfschützengewehre", "Sniper Rifles"], ["Rot // Battle Royale", "Red // Battle Royale"], ["Sortierung: Standard", "Sort: Default"], ["MW4 MASTERY TRACKER", "MW4 MASTERY TRACKER"], ["Abschluss-Tarnungen", "Completion camos"], ["Tarnungen gesammelt", "camos collected"], ["● LOCAL SAVE AKTIV", "● LOCAL SAVE ACTIVE"], ["● LOKALER SPEICHER", "● LOCAL SAVE"], ["Tracker-Grundliste", "Tracker base list"], ["Militär-Tarnungen", "Military camos"], ["Spezial-Tarnungen", "Special camos"], ["Waffen-Kategorien", "Weapon categories"], ["Maschinenpistolen", "Submachine Guns"], ["CLICK TO COLLECT", "CLICK TO COLLECT"], ["Wähle eine Waffe", "Choose a weapon"], ["Spiel auswählen", "Choose game"], ["Tracker öffnen", "Open tracker"], ["Warzone öffnen", "Open Warzone"], ["Einzelne Camos", "Individual camos"], ["Alle schließen", "Close all"], ["← SPIELAUSWAHL", "← GAME SELECT"], ["Abgeschlossen", "Completed"], ["Schrotflinten", "Shotguns"], ["Abgeschlossen", "Completed"], ["Sturmgewehre", "Assault Rifles"], ["EINGESAMMELT", "COLLECTED"], ["Sturmgewehre", "Assault Rifles"], ["Zurücksetzen", "Reset"], ["Gold fertig", "Gold complete"], ["100%-Waffen", "100% weapons"], ["Alle Waffen", "All weapons"], ["FORTSCHRITT", "PROGRESS"], ["Gespeichert", "Saved"], ["Fortschritt", "Progress"], ["Kampfgewehr", "Battle Rifles"], ["Sortierung", "Sort"], ["TARNUNGEN", "CAMOS"], ["Speichern", "Save"], ["Tarnungen", "Camos"], ["Statistik", "Stats"], ["THE CAMO", "THE CAMO"], ["Name A–Z", "Name A–Z"], ["Pistolen", "Handguns"], ["Mastery", "Mastery"], ["GRIND.", "GRIND."], ["Werfer", "Launchers"], ["Messer", "Melee"], ["Waffen", "Weapons"], ["Suchen", "Search"], ["Zurück", "Back"], ["Gesamt", "Total"], ["Suche", "Search"], ["Waffe", "Weapon"], ["Aktiv", "Active"], ["Alle", "All"], ["DMRs", "DMRs"], ["LMGs", "LMGs"], ["von", "of"], ["MPs", "SMGs"]];
+  const key = 'camoforge-language';
+  let current = 'de';
+  const replacements = dictionary.slice().sort((a,b)=>b[0].length-a[0].length);
+  function translateString(value) {
+    if (!value || !value.trim()) return value;
+    let result = value;
+    for (const pair of replacements) {
+      if (current === 'en') result = result.split(pair[0]).join(pair[1]);
+      else result = result.split(pair[1]).join(pair[0]);
+    }
+    return result;
+  }
+  function translateTree(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parent = node.parentElement;
+      if (!parent || /^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/i.test(parent.tagName) || parent.closest('#cf-language-switch')) return;
+      const next = translateString(node.nodeValue);
+      if (next !== node.nodeValue) node.nodeValue = next;
+      return;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return;
+    if (node.id === 'cf-language-switch' || node.id === 'cf-language-script' || node.id === 'cf-language-style') return;
+    for (const attr of ['placeholder','title','aria-label','alt']) {
+      if (node.hasAttribute(attr)) {
+        const before = node.getAttribute(attr), after = translateString(before);
+        if (before !== after) node.setAttribute(attr, after);
+      }
+    }
+    for (const child of Array.from(node.childNodes)) translateTree(child);
+  }
+  function applyLanguage(lang) {
+    current = lang === 'en' ? 'en' : 'de';
+    document.documentElement.lang = current;
+    try { localStorage.setItem(key, current); } catch(e) {}
+    const title = document.querySelector('title');
+    if (title) {
+      const originalTitles = {
+        'CAMO//FORGE — Wähle dein Spiel':'CAMO//FORGE — Choose your game',
+        'CAMO//FORGE — MW4 Mastery Tracker':'CAMO//FORGE — MW4 Mastery Tracker',
+        'CAMO//FORGE — Warzone Mastery Tracker':'CAMO//FORGE — Warzone Mastery Tracker'
+      };
+      const deTitle = title.textContent.includes('Choose your game') ? 'CAMO//FORGE — Wähle dein Spiel' : title.textContent;
+      if (current === 'en' && originalTitles[deTitle]) title.textContent = originalTitles[deTitle];
+      if (current === 'de' && deTitle === 'CAMO//FORGE — Wähle dein Spiel') title.textContent = deTitle;
+    }
+    translateTree(document.body);
+    document.querySelectorAll('#cf-language-switch button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === current)));
+  }
+  document.body.classList.add('cf-has-language-switch');
+  document.querySelectorAll('#cf-language-switch button').forEach(button => button.addEventListener('click', () => {
+    try { localStorage.setItem(key, button.dataset.lang); } catch(e) {}
+    location.reload();
+  }));
+  // On each page load the source UI starts in German, so reload gives a clean translation pass.
+  let saved = 'de';
+  try { saved = localStorage.getItem(key) || 'de'; } catch(e) {}
+  if (saved === 'en') {
+    current = 'en';
+    document.documentElement.lang = 'en';
+    const title = document.querySelector('title');
+    if (title && title.textContent === 'CAMO//FORGE — Wähle dein Spiel') title.textContent = 'CAMO//FORGE — Choose your game';
+    translateTree(document.body);
+  }
+  document.querySelectorAll('#cf-language-switch button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === saved)));
+  const observer = new MutationObserver(records => {
+    if (current !== 'en') return;
+    observer.disconnect();
+    for (const record of records) {
+      for (const node of record.addedNodes) translateTree(node);
+      if (record.type === 'characterData') {
+        const translated = translateString(record.target.nodeValue);
+        if (translated !== record.target.nodeValue) record.target.nodeValue = translated;
+      }
+    }
+    observer.observe(document.body, {childList:true,subtree:true,characterData:true});
+  });
+  observer.observe(document.body, {childList:true,subtree:true,characterData:true});
+})();
+</script>
+
 </body></html>
