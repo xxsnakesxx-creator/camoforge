@@ -45,9 +45,9 @@ h1{font-size:clamp(32px,6vw,62px);line-height:.98;letter-spacing:-2.5px;margin:1
     <div class="hero-card"><div><div class="eyebrow">DEIN GESAMTFORTSCHRITT</div><div class="big-number" id="overallPct">0<small>%</small></div><div class="progress"><i id="overallBar" style="width:0%"></i></div></div><div class="hero-foot"><b id="overallDone">0</b> von <b id="overallTotal">0</b> Tarnungen abgeschlossen<br>Fortschritt wird automatisch auf diesem Gerät gespeichert.</div></div>
   </section>
   <section class="stats">
-    <div class="stat"><div class="stat-label">Waffen</div><div class="stat-value" id="weaponCount">33</div><div class="stat-hint">33 Waffen aus dem MW4-Tracker</div></div>
+    <div class="stat"><div class="stat-label">Waffen</div><div class="stat-value" id="weaponCount">12</div><div class="stat-hint">Tracker-Grundliste</div></div>
     <div class="stat"><div class="stat-label">Abgeschlossen</div><div class="stat-value"><em id="doneCount">0</em></div><div class="stat-hint">Einzelne Camos</div></div>
-    <div class="stat"><div class="stat-label">Gold fertig</div><div class="stat-value"><em id="goldCount">0</em><small style="font-size:12px;color:var(--muted)" id="goldTotal"> / 33</small></div><div class="stat-hint">Gold auf allen Waffen</div></div>
+    <div class="stat"><div class="stat-label">Gold fertig</div><div class="stat-value"><em id="goldCount">0</em><small style="font-size:12px;color:var(--muted)" id="goldTotal"> / 12</small></div><div class="stat-hint">Gold auf allen Waffen</div></div>
     <div class="stat"><div class="stat-label">100%-Waffen</div><div class="stat-value"><em id="completeCount">0</em></div><div class="stat-hint">Alle Tarnungen erledigt</div></div>
   </section>
   <div class="toolbar"><div class="search"><input id="search" type="search" placeholder="Waffe suchen …" aria-label="Waffe suchen"></div><select class="select" id="sort" aria-label="Sortieren"><option value="default">Sortierung: Standard</option><option value="progress">Fortschritt: niedrig zuerst</option><option value="progressDesc">Fortschritt: hoch zuerst</option><option value="name">Name A–Z</option></select></div>
@@ -57,18 +57,13 @@ h1{font-size:clamp(32px,6vw,62px);line-height:.98;letter-spacing:-2.5px;margin:1
 </main>
 <div class="toast" id="toast">Gespeichert</div>
 <script>
+/* Hinweis: Dies ist eine bearbeitbare Grundliste. Bitte Waffen/Tarnungsnamen mit der aktuellen Warzone-Version abgleichen. */
 const weapons=[
-["Sturmgewehre","Han 86"],["Sturmgewehre","M4"],["Sturmgewehre","Hyeon Burst"],["Sturmgewehre","Patriot XMR"],["Sturmgewehre","Kastov 762"],["Sturmgewehre","Oden"],["Sturmgewehre","Axion"],["Sturmgewehre","Cronen Squall"],
-["MPs","ISO Nightshade"],["MPs","VEL 46"],["MPs","WZ.55 Striga"],["MPs","PPSh-41"],["MPs","X-58 NYX"],
-["Schrotflinten","Rezi 12"],["Schrotflinten","Warlord"],
-["LMGs","FiNN LMG"],["LMGs","Type 73"],["LMGs","APOC-338"],
-["DMRs","MAR-9"],["DMRs","Oris 8.6"],["DMRs","Mosin-Nagant"],
-["Scharfschützengewehre","KG-7 Vulcan"],["Scharfschützengewehre","Astaroth .57"],["Scharfschützengewehre","Signal 50"],
-["Pistolen","Krait P68"],["Pistolen",".50 GS"],["Pistolen","Mojave .357"],["Pistolen","Sang 9mm"],
-["Werfer","PILA"],["Werfer","RPG-8"],["Werfer","JOKR"],["Werfer","PM-40 Anvil"],
-["Messer","FSS Carbon Edge 1095 Messer"]
+["Sturmgewehre","STG-44"],["Sturmgewehre","M4"],["Sturmgewehre","Kastov 762"],["Sturmgewehre","MCW"],
+["MPs","HRM-9"],["MPs","WSP-9"],["MPs","Striker"],["MPs","Superi 46"],
+["LMGs","Pulemyot 762"],["LMGs","Holger 26"],["Scharfschützengewehre","KATT-AMR"],["Pistolen","Renetti"]
 ];
-const categories=["Alle","Sturmgewehre","MPs","Schrotflinten","LMGs","Scharfschützengewehre","DMRs","Messer","Pistolen","Werfer"];
+const categories=["Alle",...new Set(weapons.map(w=>w[0]))];
 const military=Array.from({length:8},(_,i)=>({id:"mil"+(i+1),name:"Militär-Tarnung "+(i+1)}));
 const special=[{id:"sp1",name:"Spezial-Tarnung 1"},{id:"sp2",name:"Spezial-Tarnung 2"},{id:"sp3",name:"Spezial-Tarnung 3"}];
 const completion=[{id:"gold",name:"Gold"},{id:"platinum",name:"Platin"},{id:"polyatomic",name:"Polyatomar"},{id:"orion",name:"Orion"}];
@@ -90,5 +85,101 @@ function renderWeapons(){const grid=document.getElementById("weaponGrid"),q=docu
 list.forEach(w=>{const [cat,name]=w,n=count(w),p=pct(w),card=document.createElement("article");card.className="weapon"+(p===100?" done":"")+(openWeapons.has(name)?" open":"");card.innerHTML=`<div class="weapon-head" role="button" tabindex="0"><div class="weapon-icon">${iconFor(cat)}</div><div class="weapon-main"><div class="weapon-cat">${cat}</div><div class="weapon-name">${name}</div><div class="weapon-meta">${n}/${camos.length} Tarnungen gesammelt</div><div class="progress"><i style="width:${p}%"></i></div></div><div class="weapon-pct">${p}%<small>FORTSCHRITT</small></div></div><div class="weapon-body"><div class="body-top"><strong>CLICK TO COLLECT</strong><span>Tippe auf eine Tarnung, um sie abzuhaken</span></div><div class="camo-group"><h4>Militär-Tarnungen <span>${military.filter(c=>done(name,c.id)).length}/8</span></h4><div class="camo-list" data-group="mil"></div></div><div class="camo-group"><h4>Spezial-Tarnungen <span>${special.filter(c=>done(name,c.id)).length}/3</span></h4><div class="camo-list" data-group="sp"></div></div><div class="camo-group"><h4>Abschluss-Tarnungen <span>${completion.filter(c=>done(name,c.id)).length}/4</span></h4><div class="camo-list" data-group="comp"></div></div></div>`;const head=card.querySelector(".weapon-head"),toggle=()=>{if(openWeapons.has(name)){openWeapons.delete(name);card.classList.remove("open")}else{openWeapons.add(name);card.classList.add("open")}};head.onclick=toggle;head.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle()}};[[military,"mil"],[special,"sp"],[completion,"comp"]].forEach(([arr,g])=>{const dest=card.querySelector(`[data-group="${g}"]`);arr.forEach(c=>{const b=document.createElement("button");b.className="camo"+(done(name,c.id)?" checked":"");b.innerHTML=`<span class="check">✓</span><span>${c.name}<small>${done(name,c.id)?"EINGESAMMELT":"CLICK TO COLLECT"}</small></span>`;b.onclick=()=>toggleCamo(name,c.id);dest.appendChild(b)})});grid.appendChild(card)})}
 document.getElementById("search").addEventListener("input",renderWeapons);document.getElementById("sort").addEventListener("change",renderWeapons);document.getElementById("collapseBtn").onclick=()=>{openWeapons.clear();renderWeapons()};load();document.getElementById("weaponCount").textContent=weapons.length;document.getElementById("goldTotal").textContent=" / "+weapons.length;renderTabs();renderWeapons();updateStats();
 </script>
+
+<style id="cf-language-style">
+body.cf-has-language-switch{padding-top:64px}
+#cf-language-switch{position:fixed;top:12px;right:12px;z-index:9999;display:flex;gap:5px;padding:5px;border:1px solid #454950;border-radius:999px;background:#111318eF;backdrop-filter:blur(12px);box-shadow:0 5px 22px #0008}
+#cf-language-switch button{border:0;border-radius:999px;padding:7px 10px;background:transparent;color:#c5c8ce;font-size:13px;font-weight:800;line-height:1;cursor:pointer}
+#cf-language-switch button[aria-pressed="true"]{background:#30343c;color:#fff;box-shadow:inset 0 0 0 1px #646a75}
+body.cf-has-language-switch{padding-top:56px}
+@media(max-width:600px){#cf-language-switch{top:8px;right:8px}#cf-language-switch button{padding:8px 9px}}
+</style>
+<div id="cf-language-switch" role="group" aria-label="Language / Sprache">
+<button type="button" data-lang="de" aria-pressed="true" title="Deutsch">🇩🇪 DE</button>
+<button type="button" data-lang="en" aria-pressed="false" title="English">🇬🇧 EN</button>
+</div>
+<script id="cf-language-script">
+(function(){
+  const dictionary = [["Wähle dein Spiel und verfolge deinen Tarnungs-Fortschritt. Jeder Bereich hat sein eigenes Design und seinen eigenen Tracker.", "Choose your game and track your camo progress. Each section has its own design and tracker."], ["Diese übergreifenden Herausforderungen werden getrennt vom 15-Camo-Fortschritt je Waffe verfolgt.", "These overall challenges are tracked separately from each weapon's 15-camo progress."], ["CAMO//FORGE · Fan-made tracker · Kein offizielles Activision-Produkt.", "CAMO//FORGE · Fan-made tracker · Not an official Activision product."], ["Öffne deinen Warzone-Bereich und behalte deine Camo-Ziele im Blick.", "Open your Warzone section and keep track of your camo goals."], ["Optionaler separater Fortschritt für die Pyroclast-Tarnungsreihe.", "Optional separate progress for the Pyroclast camo series."], ["Deine Waffen, Tarnungen und Mastery-Ziele – alles an einem Ort.", "Your weapons, camos, and mastery goals — all in one place."], ["Dein Warzone-Fortschritt. Wähle eine Waffe, hake Tarnungen über", "Your Warzone progress. Choose a weapon and mark camos using"], ["Fortschritt wird automatisch auf diesem Gerät gespeichert.", "Progress is saved automatically on this device."], ["Fortschritt wird automatisch auf diesem Gerät gespeichert.", "Progress is saved automatically on this device."], ["Dein Fortschritt. Jede Waffe. Jede Tarnung. Tippe auf", "Your progress. Every weapon. Every camo. Tap"], ["Öffne eine Waffe und sammle deine Tarnungen ein.", "Open a weapon and collect your camos."], ["Die interaktive Ansicht benötigt JavaScript.", "The interactive view requires JavaScript."], ["Keine Waffe gefunden. Suchbegriff ändern?", "No weapon found. Try changing your search."], ["Tippe auf eine Tarnung, um sie abzuhaken", "Tap a camo to mark it complete"], ["Call of Duty · Modern Warfare 4", "Call of Duty · Modern Warfare 4"], ["CAMO//FORGE — Wähle dein Spiel", "CAMO//FORGE — Choose your game"], ["Waffen-Tarnungen abgeschlossen", "weapon camos completed"], ["Übergreifende Mastery-Tarnung", "Overall mastery camo"], ["Fortschritt: niedrig zuerst", "Progress: lowest first"], ["Optionaler Prestige-Track", "Optional prestige track"], ["Bestätigte Launch-Waffen", "Confirmed launch weapons"], ["Fortschritt: hoch zuerst", "Progress: highest first"], ["WARZONE MASTERY TRACKER", "WARZONE MASTERY TRACKER"], ["Tarnungen abgeschlossen", "camos completed"], ["Alle Tarnungen erledigt", "All camos completed"], ["Warzone · Schwarz / Rot", "Warzone · Black / Red"], ["Gelb // Modern Warfare", "Yellow // Modern Warfare"], ["Call of Duty · Warzone", "Call of Duty · Warzone"], ["DEIN GESAMTFORTSCHRITT", "YOUR OVERALL PROGRESS"], ["Alle 15 Camos erledigt", "All 15 camos completed"], ["Your camo mastery hub", "Your camo mastery hub"], ["Gold auf allen Waffen", "Gold on all weapons"], ["Scharfschützengewehre", "Sniper Rifles"], ["Rot // Battle Royale", "Red // Battle Royale"], ["Sortierung: Standard", "Sort: Default"], ["MW4 MASTERY TRACKER", "MW4 MASTERY TRACKER"], ["Abschluss-Tarnungen", "Completion camos"], ["Tarnungen gesammelt", "camos collected"], ["● LOCAL SAVE AKTIV", "● LOCAL SAVE ACTIVE"], ["● LOKALER SPEICHER", "● LOCAL SAVE"], ["Tracker-Grundliste", "Tracker base list"], ["Militär-Tarnungen", "Military camos"], ["Spezial-Tarnungen", "Special camos"], ["Waffen-Kategorien", "Weapon categories"], ["Maschinenpistolen", "Submachine Guns"], ["CLICK TO COLLECT", "CLICK TO COLLECT"], ["Wähle eine Waffe", "Choose a weapon"], ["Spiel auswählen", "Choose game"], ["Tracker öffnen", "Open tracker"], ["Warzone öffnen", "Open Warzone"], ["Einzelne Camos", "Individual camos"], ["Alle schließen", "Close all"], ["← SPIELAUSWAHL", "← GAME SELECT"], ["Abgeschlossen", "Completed"], ["Schrotflinten", "Shotguns"], ["Abgeschlossen", "Completed"], ["Sturmgewehre", "Assault Rifles"], ["EINGESAMMELT", "COLLECTED"], ["Sturmgewehre", "Assault Rifles"], ["Zurücksetzen", "Reset"], ["Gold fertig", "Gold complete"], ["100%-Waffen", "100% weapons"], ["Alle Waffen", "All weapons"], ["FORTSCHRITT", "PROGRESS"], ["Gespeichert", "Saved"], ["Fortschritt", "Progress"], ["Kampfgewehr", "Battle Rifles"], ["Sortierung", "Sort"], ["TARNUNGEN", "CAMOS"], ["Speichern", "Save"], ["Tarnungen", "Camos"], ["Statistik", "Stats"], ["THE CAMO", "THE CAMO"], ["Name A–Z", "Name A–Z"], ["Pistolen", "Handguns"], ["Mastery", "Mastery"], ["GRIND.", "GRIND."], ["Werfer", "Launchers"], ["Messer", "Melee"], ["Waffen", "Weapons"], ["Suchen", "Search"], ["Zurück", "Back"], ["Gesamt", "Total"], ["Suche", "Search"], ["Waffe", "Weapon"], ["Aktiv", "Active"], ["Alle", "All"], ["DMRs", "DMRs"], ["LMGs", "LMGs"], ["von", "of"], ["MPs", "SMGs"]];
+  const key = 'camoforge-language';
+  let current = 'de';
+  const replacements = dictionary.slice().sort((a,b)=>b[0].length-a[0].length);
+  function translateString(value) {
+    if (!value || !value.trim()) return value;
+    let result = value;
+    for (const pair of replacements) {
+      if (current === 'en') result = result.split(pair[0]).join(pair[1]);
+      else result = result.split(pair[1]).join(pair[0]);
+    }
+    return result;
+  }
+  function translateTree(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parent = node.parentElement;
+      if (!parent || /^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/i.test(parent.tagName) || parent.closest('#cf-language-switch')) return;
+      const next = translateString(node.nodeValue);
+      if (next !== node.nodeValue) node.nodeValue = next;
+      return;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return;
+    if (node.id === 'cf-language-switch' || node.id === 'cf-language-script' || node.id === 'cf-language-style') return;
+    for (const attr of ['placeholder','title','aria-label','alt']) {
+      if (node.hasAttribute(attr)) {
+        const before = node.getAttribute(attr), after = translateString(before);
+        if (before !== after) node.setAttribute(attr, after);
+      }
+    }
+    for (const child of Array.from(node.childNodes)) translateTree(child);
+  }
+  function applyLanguage(lang) {
+    current = lang === 'en' ? 'en' : 'de';
+    document.documentElement.lang = current;
+    try { localStorage.setItem(key, current); } catch(e) {}
+    const title = document.querySelector('title');
+    if (title) {
+      const originalTitles = {
+        'CAMO//FORGE — Wähle dein Spiel':'CAMO//FORGE — Choose your game',
+        'CAMO//FORGE — MW4 Mastery Tracker':'CAMO//FORGE — MW4 Mastery Tracker',
+        'CAMO//FORGE — Warzone Mastery Tracker':'CAMO//FORGE — Warzone Mastery Tracker'
+      };
+      const deTitle = title.textContent.includes('Choose your game') ? 'CAMO//FORGE — Wähle dein Spiel' : title.textContent;
+      if (current === 'en' && originalTitles[deTitle]) title.textContent = originalTitles[deTitle];
+      if (current === 'de' && deTitle === 'CAMO//FORGE — Wähle dein Spiel') title.textContent = deTitle;
+    }
+    translateTree(document.body);
+    document.querySelectorAll('#cf-language-switch button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === current)));
+  }
+  document.body.classList.add('cf-has-language-switch');
+  document.querySelectorAll('#cf-language-switch button').forEach(button => button.addEventListener('click', () => {
+    try { localStorage.setItem(key, button.dataset.lang); } catch(e) {}
+    location.reload();
+  }));
+  // On each page load the source UI starts in German, so reload gives a clean translation pass.
+  let saved = 'de';
+  try { saved = localStorage.getItem(key) || 'de'; } catch(e) {}
+  if (saved === 'en') {
+    current = 'en';
+    document.documentElement.lang = 'en';
+    const title = document.querySelector('title');
+    if (title && title.textContent === 'CAMO//FORGE — Wähle dein Spiel') title.textContent = 'CAMO//FORGE — Choose your game';
+    translateTree(document.body);
+  }
+  document.querySelectorAll('#cf-language-switch button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === saved)));
+  const observer = new MutationObserver(records => {
+    if (current !== 'en') return;
+    observer.disconnect();
+    for (const record of records) {
+      for (const node of record.addedNodes) translateTree(node);
+      if (record.type === 'characterData') {
+        const translated = translateString(record.target.nodeValue);
+        if (translated !== record.target.nodeValue) record.target.nodeValue = translated;
+      }
+    }
+    observer.observe(document.body, {childList:true,subtree:true,characterData:true});
+  });
+  observer.observe(document.body, {childList:true,subtree:true,characterData:true});
+})();
+</script>
+
 </body>
 </html>
