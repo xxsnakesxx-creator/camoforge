@@ -70,6 +70,21 @@
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } }
   </style>
+
+<style id="cf-futuristic-home">
+:root{--cf-line:#34404b;--cf-glass:rgba(8,13,19,.82)}
+html{background:#05080c} body{position:relative;overflow-x:hidden;padding:74px 16px 34px;background:radial-gradient(ellipse at 50% 0%,#182532 0%,#080d13 45%,#030507 100%);}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background:linear-gradient(rgba(111,166,198,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(111,166,198,.09) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 88%)}
+.shell{position:relative;width:min(100%,1180px);padding:26px 26px 20px;border:1px solid #526777;border-radius:15px;background:linear-gradient(145deg,rgba(15,24,33,.94),rgba(3,7,11,.96));box-shadow:0 0 0 4px #111a22,0 25px 90px #000;}
+.shell:before{content:"SYSTEM ONLINE  //  CAMO MASTERY NETWORK";display:block;color:#91a9b9;font:700 10px/1.2 ui-monospace,monospace;letter-spacing:2.4px;text-align:left;padding:0 0 14px;border-bottom:1px solid #344653;margin-bottom:28px}
+header{text-align:center;margin:0 auto 34px;max-width:850px}.eyebrow{color:#9eb2c0;letter-spacing:.32em;font:800 11px ui-monospace,monospace}
+h1{font-family:system-ui,sans-serif;font-size:clamp(2.8rem,9vw,6rem);letter-spacing:-.07em;color:#f2f6f8;text-shadow:0 0 25px #c8e6ff44,0 0 2px #fff}
+h1 span{color:#e4bd32}.byline{color:#9fb0bc;letter-spacing:.35em}.byline span{color:#fff}.subtitle{color:#aab7c0;max-width:650px;margin:18px auto 0;line-height:1.7}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.game{position:relative;isolation:isolate;overflow:hidden;min-height:260px;padding:28px;border:1px solid #566675;border-radius:9px;background:linear-gradient(135deg,#17212b,#080c11 72%);box-shadow:inset 0 0 40px #0009,0 14px 34px #0008;text-decoration:none;transition:transform .25s,border-color .25s,box-shadow .25s}.game:before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,transparent 0 16px,#ffffff06 17px 18px);opacity:.65}.game:after{content:attr(data-number);position:absolute;right:14px;bottom:-42px;z-index:-1;font:1000 170px/1 system-ui;color:#ffffff09;letter-spacing:-.1em}.game:hover{transform:translateY(-5px);box-shadow:0 0 32px #000,inset 0 0 55px #000b}.game.mw4{border-color:#d4ae2e}.game.warzone{border-color:#d52a40}.game.mw4:hover{box-shadow:0 0 28px #e0b62a30,inset 0 0 55px #000b}.game.warzone:hover{box-shadow:0 0 28px #e02b4330,inset 0 0 55px #000b}
+.tag{display:inline-block;color:#aebdca;font:800 10px ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase}.game h2{margin:30px 0 10px;color:#f5f7f8;font-size:clamp(28px,5vw,48px);font-weight:1000;letter-spacing:-.04em;line-height:.95}.game.mw4 h2{ text-shadow:0 0 22px #e7bd2a66}.game.warzone h2{text-shadow:0 0 22px #e52a4566}.desc{max-width:390px;color:#aab6c0;line-height:1.6}.enter{display:flex;align-items:center;justify-content:space-between;margin-top:25px;padding-top:14px;border-top:1px solid #ffffff24;color:#eef3f5;font:800 11px ui-monospace,monospace;letter-spacing:1.5px;text-transform:uppercase}.mw4 .arrow{color:#f3ca32}.warzone .arrow{color:#ff4058}.arrow{font-size:22px}footer{margin-top:28px;padding-top:16px;border-top:1px solid #344653;color:#899ba8;font:700 10px/1.7 ui-monospace,monospace;letter-spacing:1.5px;text-align:center}#cf-language-switch{top:14px;right:14px;border-color:#536574;background:#091018ed}#cf-language-switch button[aria-pressed=true]{background:#293744;color:#fff}
+@media(max-width:650px){body{padding:65px 10px 20px}.shell{padding:18px 13px 15px}.choices{grid-template-columns:1fr;gap:13px}.game{min-height:205px;padding:22px}.game h2{margin-top:22px}.shell:before{font-size:8px;letter-spacing:1.4px}}
+</style>
+
 </head>
 <body>
   <main class="shell">
