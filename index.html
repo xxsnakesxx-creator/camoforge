@@ -4,6 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0b0e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CAMO//FORGE">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <title>CAMO//FORGE — Wähle dein Spiel</title>
   <meta name="description" content="Dein Camo-Mastery-Tracker für Modern Warfare 4 und Warzone.">
   <style>
@@ -197,5 +202,12 @@ body.cf-has-language-switch{padding-top:56px}
 })();
 </script>
 
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((error) => console.warn("PWA registration failed:", error));
+  });
+}
+</script>
 </body>
 </html>
