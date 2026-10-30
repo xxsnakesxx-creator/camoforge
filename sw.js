@@ -1,4 +1,4 @@
-const CACHE = "camoforge-pwa-v2";
+const CACHE = "camoforge-pwa-v3";
 const ASSETS = [
   "./",
   "./index.html",
