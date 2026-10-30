@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111214">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CAMO//FORGE">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../icon-192.png">
+<meta name="description" content="CAMO//FORGE Warzone Tracker – aktuell im Umbau.">
+<title>CAMO//FORGE — Warzone im Umbau</title>
+<style>
+:root{color-scheme:dark;--bg:#101113;--panel:#191b1f;--line:#34373d;--yellow:#ffc928;--orange:#ff8b21;--text:#f5f5f2;--muted:#a2a5aa}
+*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(ellipse at 50% 0%,#3b3015 0,transparent 42%),linear-gradient(145deg,#111214,#08090a);display:flex;flex-direction:column;overflow-x:hidden}
+.top{height:66px;padding:0 max(18px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18;background:#0a0b0de8;backdrop-filter:blur(12px)}
+.brand{font-weight:1000;letter-spacing:1.8px;font-size:17px}.brand span{color:var(--yellow)}.prod{font-size:9px;letter-spacing:2px;color:#8f9298;margin-top:2px}.status{font-size:10px;font-weight:900;letter-spacing:1.4px;color:var(--yellow);border:1px solid #ffc92866;border-radius:999px;padding:7px 11px;background:#ffc92812}
+main{width:min(760px,100%);margin:auto;padding:38px 20px 50px;text-align:center}.construction{width:min(220px,58vw);height:150px;margin:0 auto 20px;position:relative;display:grid;place-items:center}.helmet{font-size:76px;filter:drop-shadow(0 8px 18px #000)}.orbit{position:absolute;inset:8px;border:1px dashed #ffc92877;border-radius:50%;animation:spin 18s linear infinite}.orbit:before,.orbit:after{content:"";position:absolute;width:9px;height:9px;background:var(--yellow);border-radius:50%;box-shadow:0 0 15px var(--yellow)}.orbit:before{top:18px;left:22px}.orbit:after{right:15px;bottom:25px}@keyframes spin{to{transform:rotate(360deg)}}
+.kicker{font-size:11px;font-weight:950;letter-spacing:3px;color:var(--yellow);text-transform:uppercase}h1{font-size:clamp(38px,9vw,66px);line-height:.95;letter-spacing:-2px;margin:13px 0 16px;font-weight:1000}h1 span{color:var(--yellow)}.desc{max-width:510px;margin:0 auto;color:#b7bac0;font-size:15px;line-height:1.65}.bar{height:14px;border:1px solid #ffffff26;border-radius:3px;margin:34px auto 10px;max-width:470px;overflow:hidden;background:repeating-linear-gradient(135deg,#25272b 0 10px,#1b1d20 10px 20px)}.bar:after{content:"";display:block;width:34%;height:100%;background:repeating-linear-gradient(135deg,#ffc928 0 10px,#e9a91a 10px 20px);box-shadow:0 0 18px #ffc92855}.bar-label{font-size:10px;color:#858990;letter-spacing:2px;font-weight:800}.panel{max-width:470px;margin:30px auto 0;padding:17px;border:1px solid #ffffff1b;border-radius:14px;background:linear-gradient(145deg,#1d1f23,#131518);text-align:left}.panel-head{font-size:11px;color:var(--yellow);letter-spacing:1.7px;font-weight:950;margin-bottom:9px}.panel p{margin:0;color:#b8bbc0;font-size:13px;line-height:1.55}.back{display:inline-flex;margin-top:25px;color:#c8cbd0;text-decoration:none;font-size:12px;font-weight:800;border:1px solid #ffffff28;border-radius:10px;padding:11px 15px}.back:active{transform:scale(.98)}
+.stripe{height:10px;background:repeating-linear-gradient(135deg,#ffc928 0 14px,#17181a 14px 28px);border-top:1px solid #000;border-bottom:1px solid #000}.foot{text-align:center;padding:16px 10px calc(16px + env(safe-area-inset-bottom));font-size:9px;letter-spacing:1.5px;color:#73777e}
+@media(prefers-reduced-motion:reduce){.orbit{animation:none}}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<header class="top"><div><div class="brand">CAMO<span>//</span>FORGE</div><div class="prod">PRODUZIERT BY KAIZO</div></div><div class="status">● IM UMBAU</div></header>
+<main>
+  <div class="construction" aria-hidden="true"><div class="orbit"></div><div class="helmet">👷</div></div>
+  <div class="kicker">Warzone Division · Baustellenbereich</div>
+  <h1>WIR BAUEN<br><span>UM.</span></h1>
+  <p class="desc">Hier wird gerade geschraubt, geschweißt und neu aufgebaut. Der Warzone-Camo-Tracker bekommt ein neues Upgrade. Schau später wieder vorbei – es lohnt sich.</p>
+  <div class="bar"></div><div class="bar-label">BAUARBEITEN LAUFEN</div>
+  <section class="panel"><div class="panel-head">⚠ BAUSTELLENHINWEIS</div><p>Dieser Bereich ist vorübergehend geschlossen. Der Warzone-Tracker wird überarbeitet und kommt zurück, sobald alles bereit ist.</p></section>
+  <a class="back" href="../index.html">← ZURÜCK ZUR STARTSEITE</a>
+</main>
+<div class="stripe"></div>
+<footer class="foot">CAMO//FORGE · WARZONE TRACKER · WORK IN PROGRESS</footer>
+</body>
+</html>
